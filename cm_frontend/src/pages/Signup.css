@@ -93,7 +93,7 @@
 }
 
 .signup-form button:hover:not(:disabled) {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color:orange; /* Darker blue on hover */
 }
 
 /* Login link */

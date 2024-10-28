@@ -4,8 +4,8 @@ import './ContactList.css';
 
 function ContactList() {
   const [contacts, setContacts] = useState({});
-  const [tasks, setTasks] = useState({});                                                                                                                                                
-  const [newTask, setNewTask] = useState(''); // State to handle new task input
+  const [tasks, setTasks] = useState({});
+  const [newTask, setNewTask] = useState('');
   const [editContactId, setEditContactId] = useState(null);
   const [editFormData, setEditFormData] = useState({
     name: '',
@@ -14,9 +14,10 @@ function ContactList() {
     additionalInfo: '',
   });
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedContactId, setSelectedContactId] = useState(null); // Store the selected contact's ID
+  const [loading, setLoading] = useState(false); // Loading state
 
   const fetchContacts = async () => {
+    setLoading(true);
     try {
       const response = await axios.get('http://localhost:5000/api/contacts');
       const groupedContacts = {};
@@ -31,6 +32,8 @@ function ContactList() {
       setContacts(groupedContacts);
     } catch (error) {
       console.error('Failed to retrieve contacts', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,27 +63,27 @@ function ContactList() {
     });
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (contactId) => {
+    if (!contactId) {
+      alert('Please select a contact to delete.');
+      return;
+    }
+  
     try {
-      await axios.delete(`http://localhost:5000/api/contacts/${id}`);
+      await axios.delete(`http://localhost:5000/api/contacts/${contactId}`);
       alert('Contact deleted successfully!');
-      fetchContacts();
+      fetchContacts(); // Refresh contacts list after deletion
     } catch (error) {
       console.error('Failed to delete contact', error);
       alert('Error deleting contact');
     }
   };
 
-  const handleEdit = () => {
-    if (!selectedContactId) {
-      alert('Please select a contact to edit.');
-      return;
-    }
-
-    const contactToEdit = Object.values(contacts).flat().find(contact => contact._id === selectedContactId);
-
+  const handleEdit = (contactId) => {
+    const contactToEdit = Object.values(contacts).flat().find(contact => contact._id === contactId);
+    
     if (contactToEdit) {
-      setEditContactId(selectedContactId);
+      setEditContactId(contactId);
       setEditFormData({
         name: contactToEdit.name,
         email: contactToEdit.email,
@@ -102,7 +105,6 @@ function ContactList() {
       await axios.put(`http://localhost:5000/api/contacts/${editContactId}`, editFormData);
       alert('Contact updated successfully!');
       setEditContactId(null); // Clear edit mode
-      setSelectedContactId(null); // Clear selection
       fetchContacts(); // Refresh contacts
     } catch (error) {
       console.error('Failed to update contact', error);
@@ -120,10 +122,6 @@ function ContactList() {
     return acc;
   }, {});
 
-  const handleSelectContact = (contactId) => {
-    setSelectedContactId(contactId === selectedContactId ? null : contactId); // Toggle selection
-  };
-
   return (
     <div className="contact-list">
       <h2>Contact List</h2>
@@ -136,101 +134,100 @@ function ContactList() {
         className="search-input"
       />
 
-      {Object.keys(filteredContacts).map((type) => (
-        <div key={type} className="contact-section">
-          <h3>{type} Contacts</h3>
-          {filteredContacts[type].length === 0 ? (
-            <p>No contacts found for {type}</p>
-          ) : (
-            filteredContacts[type].map((contact) => (
-              <div key={contact._id} className="contact-item">
-                <div className="contact-info">
-                  <input
-                    type="checkbox"
-                    checked={selectedContactId === contact._id}
-                    onChange={() => handleSelectContact(contact._id)}
-                  />
-                  {editContactId === contact._id ? (
-                    <div>
+      {loading ? (
+        <p>Loading contacts...</p>
+      ) : (
+        Object.keys(filteredContacts).map((type) => (
+          <div key={type} className="contact-section">
+            <h3>{type} Contacts</h3>
+            {filteredContacts[type].length === 0 ? (
+              <p>No contacts found for {type}</p>
+            ) : (
+              filteredContacts[type].map((contact) => (
+                <div key={contact._id} className="contact-item">
+                  <div className="contact-info">
+                    {editContactId === contact._id ? (
+                      <div>
+                        <input
+                          type="text"
+                          name="name"
+                          value={editFormData.name}
+                          onChange={handleEditChange}
+                          placeholder="Name"
+                        />
+                        <input
+                          type="email"
+                          name="email"
+                          value={editFormData.email}
+                          onChange={handleEditChange}
+                          placeholder="Email"
+                        />
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={editFormData.phone}
+                          onChange={handleEditChange}
+                          placeholder="Phone"
+                        />
+                        <textarea
+                          name="additionalInfo"
+                          value={editFormData.additionalInfo}
+                          onChange={handleEditChange}
+                          placeholder="Additional Info"
+                        />
+                        <button onClick={handleSave} className="save-button">Save</button>
+                        <button onClick={() => setEditContactId(null)} className="cancel-button">Cancel</button>
+                      </div>
+                    ) : (
+                      <div>
+                        <h4>{contact.name}</h4>
+                        <p>Email: {contact.email}</p>
+                        <p>Phone: {contact.phone}</p>
+                        <p>Info: {contact.additionalInfo}</p>
+                        <div className="button-container">
+                          <button onClick={() => handleEdit(contact._id)} className="edit-button">Edit</button>
+                          <button onClick={() => handleDelete(contact._id)} className="delete-button">Delete</button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Task/Reminder Section */}
+                    <div className="task-section">
+                      <h5>Tasks/Reminders</h5>
+                      <ul>
+                        {(tasks[contact._id] || []).map((task, index) => (
+                          <li key={index}>
+                            {task}
+                            <button
+                              onClick={() => handleDeleteTask(contact._id, index)}
+                              className="delete-task-button"
+                            >
+                              Delete
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
                       <input
                         type="text"
-                        name="name"
-                        value={editFormData.name}
-                        onChange={handleEditChange}
-                        placeholder="Name"
+                        value={newTask}
+                        onChange={handleTaskChange}
+                        placeholder="New Task/Reminder"
+                        className="task-input"
                       />
-                      <input
-                        type="email"
-                        name="email"
-                        value={editFormData.email}
-                        onChange={handleEditChange}
-                        placeholder="Email"
-                      />
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={editFormData.phone}
-                        onChange={handleEditChange}
-                        placeholder="Phone"
-                      />
-                      <textarea
-                        name="additionalInfo"
-                        value={editFormData.additionalInfo}
-                        onChange={handleEditChange}
-                        placeholder="Additional Info"
-                      />
-                      <button onClick={handleSave} className="save-button">Save</button>
-                      <button onClick={() => setEditContactId(null)} className="cancel-button">Cancel</button>
+                      <button
+                        onClick={() => handleAddTask(contact._id)}
+                        className="add-task-button"
+                      >
+                        Add Task
+                      </button>
                     </div>
-                  ) : (
-                    <div>
-                      <h4>{contact.name}</h4>
-                      <p>Email: {contact.email}</p>
-                      <p>Phone: {contact.phone}</p>
-                      <p>Info: {contact.additionalInfo}</p>
-                      <div className="button-container">
-                        <button onClick={handleEdit} className="edit-button">Edit</button>
-                        <button onClick={() => handleDelete(contact._id)} className="delete-button">Delete</button>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Task/Reminder Section */}
-                  <div className="task-section">
-                    <h5>Tasks/Reminders</h5>
-                    <ul>
-                      {(tasks[contact._id] || []).map((task, index) => (
-                        <li key={index}>
-                          {task}
-                          <button
-                            onClick={() => handleDeleteTask(contact._id, index)}
-                            className="delete-task-button"
-                          >
-                            Delete
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                    <input
-                      type="text"
-                      value={newTask}
-                      onChange={handleTaskChange}
-                      placeholder="New Task/Reminder"
-                      className="task-input"
-                    />
-                    <button
-                      onClick={() => handleAddTask(contact._id)}
-                      className="add-task-button"
-                    >
-                      Add Task
-                    </button>
                   </div>
                 </div>
-              </div>
-            ))
-          )}
-        </div>
-      ))}
+              ))
+            )}
+          </div>
+        ))
+      )}
     </div>
   );
 }

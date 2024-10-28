@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { ContactContext } from '../context/ContactContext';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto'; // Import for chart support
-
+import './Datavisualization.css';
 function DataVisualization() {
   const { contacts } = useContext(ContactContext);
 

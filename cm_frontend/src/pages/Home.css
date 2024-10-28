@@ -1,52 +1,93 @@
 /* Home.css */
+
+/* Container for the whole page */
 .home-container {
-  display: flex; /* Enable flexbox */
-  flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Center the image and buttons horizontally */
-  justify-content: center; /* Center vertically */
-  min-height: 100vh; /* Minimum height of 100% of the viewport */
-  width: 100%; /* Full width */
-  background-color: #f0f0f0; /* Optional: A light background color */
-  position: relative; /* For positioning buttons absolutely */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6f86d6, #48c6ef); /* Gradient background */
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
 }
 
+/* Styling for the welcome message */
 .welcome-message {
-  font-size: 2rem; /* Font size for the welcome message */
-  margin-bottom: 20px; /* Space below the welcome message */
-  color: black; /* Change text color for better contrast */
-  text-align: center; /* Center the text */
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for text */
 }
 
+/* Container for the main image */
 .image-container {
-  
-  margin: 20px 0; /* Space around the image */
-  display: flex; /* Center the image container */
-  justify-content: center; /* Center image container */
+  margin-bottom: 3rem;
+  max-width: 600px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Shadow for the image */
 }
 
+/* Styling for the main image */
 .image {
-  width: 750px; /* Set a fixed width for the image */
-  height: auto; /* Maintain aspect ratio */
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+  border-radius: 10px;
 }
 
+/* Hover effect for the image */
+.image:hover {
+  transform: scale(1.05);
+}
+
+/* Container for navigation buttons */
 .button-container {
-  position: absolute; /* Position buttons absolutely */
-  top: 20px; /* Distance from the top */
-  right: 20px; /* Distance from the right */
-  display: flex; /* Use flexbox to align buttons */
-  gap: 20px; /* Space between buttons */
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
-button {
-  padding: 10px 20px; /* Padding for buttons */
-  font-size: 1rem; /* Font size for buttons */
-  cursor: pointer; /* Pointer cursor on hover */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  background-color: #007bff; /* Button background color */
-  color: white; /* Button text color */
+/* Styling for each navigation button */
+.nav-button {
+  background-color: #ffffff;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Button shadow */
+  transition: all 0.3s ease-in-out;
 }
 
-button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+/* Hover effect for buttons */
+.nav-button:hover {
+  background-color: #ff8c00; /* Bright orange on hover */
+  color: #fff;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .welcome-message {
+    font-size: 2rem;
+  }
+
+  .image-container {
+    margin-bottom: 2rem;
+  }
+
+  .nav-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
 }

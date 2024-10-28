@@ -1,66 +1,114 @@
 /* AddContact.css */
 
+/* Container for the Add Contact form */
 .add-contact-form {
-    width: 100%;
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6f86d6, #48c6ef); /* Gradient background */
+  color: #fff;
+  padding: 2rem;
+}
+
+/* Box for the form */
+.form-box {
+  background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
+  border: 2px solid #007BFF; /* Border that complements the background */
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%; /* Full width */
+  max-width: 500px; /* Set a max width for larger screens */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+/* Styling for the form header */
+.form-box h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem; /* Reduced margin to create space */
+  color: #333; /* Darker text color for contrast */
+}
+
+/* Styling for form labels */
+label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333; /* Darker text color for contrast */
+}
+
+/* Styling for select and input elements */
+select,
+input,
+textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+/* Focus effect for inputs */
+select:focus,
+input:focus,
+textarea:focus {
+  border-color: #ff8c00; /* Change border color on focus */
+}
+
+/* Styling for the additional info textarea */
+textarea {
+  resize: vertical; /* Allow vertical resizing */
+  height: 100px; /* Set initial height */
+}
+
+/* Styling for the Add Type button */
+button[type="button"],
+button[type="submit"] {
+  background-color: #ffffff;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Button shadow */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover effect for buttons */
+button[type="button"]:hover,
+button[type="submit"]:hover {
+  background-color: #ff8c00; /* Bright orange on hover */
+  color: #fff;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .add-contact-form {
+    padding: 1rem; /* Less padding on smaller screens */
   }
-  
-  .add-contact-form h2 {
-    text-align: center;
-    color: #4a90e2;
-    font-size: 2em;
-    margin-bottom: 20px;
+
+  .form-box {
+    padding: 1.5rem; /* Adjust padding for the form box */
   }
-  
-  .add-contact-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
+
+  .form-box h2 {
+    font-size: 1.5rem;
   }
-  
-  .add-contact-form input,
-  .add-contact-form select,
-  .add-contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1em;
+
+  select,
+  input,
+  textarea {
+    padding: 0.6rem;
   }
-  
-  .add-contact-form select {
-    cursor: pointer;
-    background-color: #fff;
+
+  button {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
   }
-  
-  .add-contact-form textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-  
-  .add-contact-form button {
-    width: 100%;
-    padding: 12px;
-    font-size: 1em;
-    font-weight: bold;
-    color: #fff;
-    background-color: #4a90e2;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-contact-form button:hover {
-    background-color: #357ABD;
-  }
-  
+}

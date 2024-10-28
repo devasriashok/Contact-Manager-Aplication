@@ -31,7 +31,7 @@ function AddContact({ onContactAdded }) {
     if (customType && !contactTypes.includes(customType)) {
       setContactTypes([...contactTypes, customType]);
       setSelectedType(customType); // Automatically select the new type
-      setCustomType('');
+      setCustomType(''); // Clear the input after adding
     }
   };
 
@@ -54,46 +54,48 @@ function AddContact({ onContactAdded }) {
 
   return (
     <div className="add-contact-form">
-      <h2>Add Contact</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Contact Type:</label>
-        <select value={selectedType} onChange={handleTypeChange} required>
-          <option value="">Select Type</option>
-          {contactTypes.map((type) => (
-            <option key={type} value={type}>{type}</option>
-          ))}
-        </select>
+      <div className="form-box">
+        <h2>Add Contact</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Contact Type:</label>
+          <select value={selectedType} onChange={handleTypeChange} required>
+            <option value="">Select Type</option>
+            {contactTypes.map((type) => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+          </select>
 
-        <input
-          type="text"
-          placeholder="Or enter custom type"
-          value={customType}
-          onChange={handleCustomTypeChange}
-        />
-        <button type="button" onClick={handleAddType}>Add Type</button>
+          <input
+            type="text"
+            placeholder="Or enter custom type"
+            value={customType}
+            onChange={handleCustomTypeChange}
+          />
+          <button type="button" onClick={handleAddType}>Add Type</button><br></br><br></br>
 
-        <label>Name:</label>
-        <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+          <label>Name:</label>
+          <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
 
-        <label>Email:</label>
-        <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+          <label>Email:</label>
+          <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
 
-        <label>Phone:</label>
-        <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required />
+          <label>Phone:</label>
+          <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required />
 
-        {selectedType && (
-          <>
-            <label>{selectedType} Info:</label>
-            <textarea
-              name="additionalInfo"
-              value={formData.additionalInfo}
-              onChange={handleInputChange}
-            />
-          </>
-        )}
+          {selectedType && (
+            <>
+              <label>{selectedType} Info:</label>
+              <textarea
+                name="additionalInfo"
+                value={formData.additionalInfo}
+                onChange={handleInputChange}
+              />
+            </>
+          )}
 
-        <button type="submit">Add Contact</button>
-      </form>
+          <button type="submit">Add Contact</button>
+        </form>
+      </div>
     </div>
   );
 }

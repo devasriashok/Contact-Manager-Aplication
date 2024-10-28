@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
-const Login = ({ onLogin, onLogout }) => { // Accept onLogin and onLogout as props
+const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -30,11 +30,16 @@ const Login = ({ onLogin, onLogout }) => { // Accept onLogin and onLogout as pro
     }
   };
 
+  // Define the handleLogout function to navigate to SignUp page
+  const handleLogout = () => {
+    navigate('/signup'); // Redirect to the Sign-Up page
+  };
+
   return (
     <div className="login-page">
       {/* Top-right corner Logout button */}
       <div className="logout-container">
-        <button className="logout-button" onClick={onLogout}>Logout</button>
+        <button className="logout-button" onClick={handleLogout}>Logout</button>
       </div>
 
       {/* Login box below */}
