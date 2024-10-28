@@ -1,0 +1,112 @@
+/* Signup.css */
+
+/* Main container */
+.signup-page {
+  max-width: 500px;
+  margin: 0 auto; /* Center the content horizontally */
+  padding: 20px;
+  text-align: center;
+  margin-top: 50px; /* Add space at the top */
+}
+
+/* Header section */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align the content */
+  margin-bottom: 40px; /* Add space between title and signup box */
+}
+
+/* Application title */
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px; /* Space below the title */
+}
+
+/* Sign-out button aligned to the top right corner */
+.signout-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Signup form container */
+.signup-form {
+  padding: 20px;
+  border: 2px solid #007bff; /* Blue border */
+  border-radius: 8px;
+  background-color: #000; /* Black background */
+  color: #ffffff; /* White text color for better contrast */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin-top: 20px; /* Space between the title and the form */
+}
+
+/* Form labels and input fields */
+.signup-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: left;
+  color: #ffffff; /* White text color for labels */
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #007bff; /* Blue border for input fields */
+  background-color: #222; /* Darker input field background */
+  color: #ffffff; /* White text color in inputs */
+  border-radius: 5px;
+}
+
+/* Error messages */
+.signup-form .error {
+  color: red;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+/* Submit button */
+.signup-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff; /* Blue background for submit button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.signup-form button:disabled {
+  background-color: #cccccc;
+}
+
+.signup-form button:hover:not(:disabled) {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Login link */
+.signup-form p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.signup-form a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-form a:hover {
+  text-decoration: underline;
+}
