@@ -5,7 +5,7 @@ const User = require('../models/User');
 const router = express.Router();
 
 router.post('/signup', async (req, res) => {
-  const { username, password, email } = req.body;
+  const { username, password, email, role } = req.body; // Include role in destructuring
 
   try {
     // Check if the user already exists
@@ -17,11 +17,12 @@ router.post('/signup', async (req, res) => {
     // Hash the password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create a new user
+    // Create a new user with a role
     const newUser = new User({
       username,
       password: hashedPassword,
       email,
+      role: role || 'user', // Assign 'user' as default role if not specified
     });
 
     // Save the user to the database
@@ -50,7 +51,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Optionally, return user info or session token (if needed)
-    res.json({ message: 'Login successful!' });
+    res.json({ message: 'Login successful!', role: user.role }); // Include role in response
   } catch (error) {
     res.status(500).json({ message: 'Error logging in' });
   }
