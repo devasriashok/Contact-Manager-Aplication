@@ -1,0 +1,153 @@
+/* General container styling */
+.emergency-alert-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff6a00, #ffcc00);
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+    animation: background-animation 10s ease-in-out infinite;
+  }
+  
+  /* Animate the background gradient */
+  @keyframes background-animation {
+    0% { background: linear-gradient(135deg, #ffafbd, #ffc3a0); }
+    50% { background: linear-gradient(135deg,#ffc3a0, #ffafbd); }
+    100% { background: linear-gradient(135deg, #ffafbd, #ffc3a0); }
+  }
+  
+  /* Styling for the alert heading */
+  .emergency-alert-container h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in forwards;
+  }
+  
+  /* Fade-in animation */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Select dropdown styling */
+  .emergency-alert-select {
+    padding: 1rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  /* Hover effect for select */
+  .emergency-alert-select:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Textarea styling */
+  .emergency-alert-textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease-in-out;
+    resize: vertical;
+  }
+  
+  /* Hover effect for textarea */
+  .emergency-alert-textarea:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Button styling */
+  .emergency-alert-button {
+    background-color: #ffffff;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 1rem;
+  }
+  
+  /* Button hover effect */
+  .emergency-alert-button:hover {
+    background-color: #ff8c00;
+    color: #fff;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    animation: pulse 0.6s ease-in-out infinite;
+  }
+  
+  /* Pulse animation */
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  /* Error message styling */
+  .alert-message {
+    background-color: #ffcccb;
+    color: #a94442;
+    padding: 10px;
+    margin-top: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem;
+  }
+  
+  /* List of existing alerts */
+  .alert-list {
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 600px;
+    overflow-y: auto;
+  }
+  
+  /* Styling for individual alert items */
+  .alert-item {
+    background-color: #fff;
+    color: #333;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .emergency-alert-container h1 {
+      font-size: 2rem;
+    }
+  
+    .emergency-alert-select,
+    .emergency-alert-textarea,
+    .emergency-alert-button {
+      width: 90%;
+      font-size: 0.9rem;
+    }
+  
+    .alert-item {
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
+  }
+  

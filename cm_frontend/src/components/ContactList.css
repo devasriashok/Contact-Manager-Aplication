@@ -1,69 +1,33 @@
-/* ContactList.css */
-
-
-/* ContactList.css */
-/* ContactList.css */
-.button-container {
-  display: flex; /* Use flexbox for buttons */
-  gap: 10px; /* Space between buttons */
-  margin-top: 10px; /* Add some space above buttons */
-}
-.edit-button, .delete-button, .save-button, .cancel-button {
+/* Common button styling for gradient and hover */
+.edit-button, .delete-button, .save-button, .cancel-button, .add-task-button, .delete-task-button, .add-contact-button, .contact-item button {
   cursor: pointer;
-}
-
-.edit-button {
-  background-color: #4a90e2;
+  background-image: linear-gradient(to left, #ab68ca, #de67a3);
   color: white;
   border: none;
   padding: 8px;
   border-radius: 4px;
-  cursor: pointer;
+  transition: background 0.3s;
 }
 
-.delete-button {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 8px;
-  border-radius: 4px;
-  cursor: pointer;
+.edit-button:hover, .delete-button:hover, .save-button:hover, .cancel-button:hover, .add-task-button:hover, .delete-task-button:hover, .add-contact-button:hover, .contact-item button:hover {
+  background-image: linear-gradient(to left, #de67a3, #ab68ca);
 }
 
-.edit-button:hover {
-  background-color: #357ABD;
-}
-
-.delete-button:hover {
-  background-color: #c0392b;
-}
-
-
-.contact-list {
-  width: 80%;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
-  color: #333;
-}
-
+/* Title gradient styling */
 .contact-list h2 {
   text-align: center;
   font-size: 2em;
-  color: #4a90e2;
+  background-image: linear-gradient(to left, #ab68ca, #de67a3);
+  -webkit-background-clip: text;
+  color: transparent;
   margin-bottom: 20px;
   font-weight: bold;
 }
 
-.contact-section {
-  margin-bottom: 40px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
+/* Section heading with gradient background */
 .contact-section h3 {
-  background-color: #4a90e2;
-  color: #fff;
+  background-image: linear-gradient(to left, #ab68ca, #de67a3);
+  color: white;
   padding: 10px 15px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -72,16 +36,26 @@
   text-align: center;
 }
 
+/* Contact item container */
 .contact-item {
   display: flex;
-  justify-content: space-between; /* Aligns items to space them out */
-  align-items: center; /* Centers items vertically */
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ccc
+  border-bottom: 1px solid #ccc;
 }
 
-.contact-item:last-child {
-  border-bottom: none;
+/* Styling for alerted contacts with distinct border and background */
+.contact-item.alerted {
+  border: 2px solid #ff9800; /* Orange border for alerted contacts */
+  background-color: #fff3e0; /* Light orange background for alert differentiation */
+}
+
+/* Container for edit and delete buttons */
+.button-container {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  margin-top: 10px;
 }
 
 .contact-item h4 {
@@ -96,57 +70,21 @@
   color: #555;
 }
 
-.contact-item button {
-  background-color: #4a90e2;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  margin-right: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.contact-item button:hover {
-  background-color: #357ABD;
-}
-
-.contact-item button:last-of-type {
-  background-color: #f44336;
-}
-
-.contact-item button:last-of-type:hover {
-  background-color: #d32f2f;
-}
-.contact-details {
-  flex-grow: 1; /* Makes this section take up remaining space */
-}
-.no-contacts {
-  text-align: center;
-  font-size: 1em;
-  color: #777;
-  padding: 15px;
-}
 .search-input {
   width: 100%;
-  max-width: 400px; /* Limit the maximum width */
+  max-width: 400px;
   padding: 10px;
-  margin-bottom: 20px; /* Space below the search input */
+  margin-bottom: 20px;
   font-size: 16px;
-  border: 2px solid #ccc; /* Light grey border */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  outline: none; /* Remove default outline */
-  transition: border-color 0.3s ease; /* Smooth transition for border color */
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
-/* Change border color on focus */
 .search-input:focus {
-  border-color: #007bff; /* Change border color to a blue tone */
-}
-
-.task-section {
-  margin-top: 10px;
+  border-color: #007bff;
 }
 
 .task-section h4 {
@@ -165,17 +103,39 @@ li {
   margin-bottom: 5px;
 }
 
-.add-task-button, .delete-task-button {
-  margin-top: 5px;
-  margin-right: 5px;
-  background-color: #0066cc;
-  color: white;
+/* Blurred disabled style */
+.blurred {
+  filter: blur(2px);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Task styling */
+.task {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.task span {
+  flex-grow: 1;
+}
+
+/* Task button styling with gradient */
+.task button {
+  margin-left: 10px;
+  padding: 5px 10px;
   border: none;
-  padding: 5px;
+  background-image: linear-gradient(to left, #ab68ca, #de67a3);
+  color: white;
   cursor: pointer;
   border-radius: 3px;
 }
 
-.add-task-button:hover, .delete-task-button:hover {
-  background-color: #004c99;
+.task button:hover {
+  background-image: linear-gradient(to left, #de67a3, #ab68ca);
 }

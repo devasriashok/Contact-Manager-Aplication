@@ -7,7 +7,7 @@ const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,9 +20,9 @@ const Login = ({ onLogin }) => {
       });
 
       if (response.status === 200) {
-        // Successful login
-        alert(response.data.message); // Show success message
-        onLogin(); // Call the onLogin prop to update logged-in state
+        alert(response.data.message);
+        const userRole = response.data.role; // Get user role
+        onLogin(userRole); // Pass role to onLogin
         navigate('/'); // Redirect to home page
       }
     } catch (error) {
@@ -30,19 +30,8 @@ const Login = ({ onLogin }) => {
     }
   };
 
-  // Define the handleLogout function to navigate to SignUp page
-  const handleLogout = () => {
-    navigate('/signup'); // Redirect to the Sign-Up page
-  };
-
   return (
     <div className="login-page">
-      {/* Top-right corner Logout button */}
-      <div className="logout-container">
-        <button className="logout-button" onClick={handleLogout}>Logout</button>
-      </div>
-
-      {/* Login box below */}
       <div className="login-container">
         <h2>Login</h2>
         {errorMessage && <p className="error">{errorMessage}</p>}

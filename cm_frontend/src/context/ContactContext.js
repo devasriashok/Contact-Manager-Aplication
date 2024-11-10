@@ -5,7 +5,7 @@ import axios from 'axios';
 export const ContactContext = createContext();
 
 export const ContactProvider = ({ children }) => {
-  const [contacts, setContacts] = useState({});
+  const [contacts, setContacts] = useState({}); // contacts is an object
 
   // Fetch contacts from the server
   const fetchContacts = async () => {
@@ -36,12 +36,26 @@ export const ContactProvider = ({ children }) => {
     }
   };
 
+  // Send emergency alert to a specific contact type
+  const sendEmergencyAlert = async (contactType, message) => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/alerts', {
+        type: contactType,
+        message: message
+      });
+      console.log('Alert sent:', response.data);
+      fetchContacts(); // Refresh contacts after sending alert
+    } catch (error) {
+      console.error('Failed to send emergency alert', error);
+    }
+  };
+
   useEffect(() => {
     fetchContacts();
   }, []);
 
   return (
-    <ContactContext.Provider value={{ contacts, fetchContacts, addContact }}>
+    <ContactContext.Provider value={{ contacts, fetchContacts, addContact, sendEmergencyAlert }}>
       {children}
     </ContactContext.Provider>
   );

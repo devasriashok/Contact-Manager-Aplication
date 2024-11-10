@@ -1,112 +1,81 @@
-/* Signup.css */
-
-/* Main container */
-.signup-page {
-  max-width: 500px;
-  margin: 0 auto; /* Center the content horizontally */
-  padding: 20px;
-  text-align: center;
-  margin-top: 50px; /* Add space at the top */
+.signup-container {
+  display: flex;
+  height: 100vh;
 }
 
-/* Header section */
-.header {
+.signup-image {
+  width: 50%; /* 50% of the screen */
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-height:90 vh;
+  height: 50px;;
+}
+
+.signup-form {
+  width: 50%; /* 50% of the screen */
+  padding: 40px;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center align the content */
-  margin-bottom: 40px; /* Add space between title and signup box */
+  justify-content: center;
+  align-items: center;
+  box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Application title */
-.header h1 {
-  margin: 0;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 20px; /* Space below the title */
+.signup-form h2 {
+  color:#de67a3 ;
+  margin-bottom: 20px;
 }
 
-/* Sign-out button aligned to the top right corner */
-.signout-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9rem;
+.signup-form form {
+  width: 100%;
+  max-width: 400px;
 }
 
-/* Signup form container */
-.signup-form {
-  padding: 20px;
-  border: 2px solid #007bff; /* Blue border */
-  border-radius: 8px;
-  background-color: #000; /* Black background */
-  color: #ffffff; /* White text color for better contrast */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  margin-top: 20px; /* Space between the title and the form */
-}
-
-/* Form labels and input fields */
 .signup-form label {
-  display: block;
-  margin-bottom: 5px;
   font-weight: bold;
-  text-align: left;
-  color: #ffffff; /* White text color for labels */
+  margin-bottom: 5px;
 }
 
-.signup-form input {
+.signup-form input, .signup-form select {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #007bff; /* Blue border for input fields */
-  background-color: #222; /* Darker input field background */
-  color: #ffffff; /* White text color in inputs */
-  border-radius: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-/* Error messages */
-.signup-form .error {
-  color: red;
-  font-size: 0.9em;
-  margin-bottom: 10px;
-}
-
-/* Submit button */
 .signup-form button {
   width: 100%;
   padding: 10px;
-  background-color: #007bff; /* Blue background for submit button */
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 1em;
 }
 
 .signup-form button:disabled {
-  background-color: #cccccc;
+  background-color: #ccc;
 }
 
-.signup-form button:hover:not(:disabled) {
-  background-color:orange; /* Darker blue on hover */
-}
-
-/* Login link */
 .signup-form p {
-  text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
+  font-size: 14px;
 }
 
-.signup-form a {
-  color: #007bff;
-  text-decoration: none;
+.signup-form .error {
+  color: red;
+  font-size: 12px;
 }
 
-.signup-form a:hover {
-  text-decoration: underline;
+.password-field {
+  display: flex;
+  align-items: center;
+}
+
+.eye-icon {
+  cursor: pointer;
+  margin-left: 10px;
 }

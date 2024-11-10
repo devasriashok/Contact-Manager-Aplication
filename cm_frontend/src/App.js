@@ -1,3 +1,4 @@
+// src/App.js
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import Signup from './pages/Signup';
@@ -6,41 +7,53 @@ import Home from './pages/Home';
 import AddContact from './pages/AddContact';
 import ContactList from './components/ContactList';
 import DataVisualization from './components/DataVisualization';
+import EmergencyAlert from './pages/EmergencyAlert';
 import { ContactProvider } from './context/ContactContext';
-// src/index.js or src/App.js
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
 
-
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track if user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState('user');
 
-  const handleLogin = () => {
-    setIsLoggedIn(true); // Set logged in state to true
+  const handleLogin = (role) => {
+    setIsLoggedIn(true);
+    setUserRole(role);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
   };
 
   return (
     <ContactProvider>
-    <Router>
-      <nav>
-        {/* Only show navigation if user is logged in */}
-        {isLoggedIn && (
-          <>
-            
-          </>
-        )}
-      </nav>
-      <Routes>
-        {/* Redirect to Home if logged in */}
-        <Route path="/" element={isLoggedIn ? <Home /> : <Navigate to="/signup" />} />
-        <Route path="/add-contact" element={isLoggedIn ? <AddContact /> : <Navigate to="/signup" />} />
-        <Route path="/contact-list" element={isLoggedIn ? <ContactList /> : <Navigate to="/signup" />} />
-        <Route path="/data-visualization" element={<DataVisualization />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} /> {/* Pass handleLogin to Login */}
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route 
+            path="/" 
+            element={isLoggedIn ? <Home userRole={userRole} onLogout={handleLogout} /> : <Navigate to="/signup" />} 
+          />
+          <Route 
+            path="/add-contact" 
+            element={isLoggedIn && userRole === 'admin' ? <AddContact /> : <Navigate to="/signup" />} 
+          />
+          <Route 
+            path="/contact-list" 
+            element={isLoggedIn ? <ContactList userRole={userRole} /> : <Navigate to="/signup" />} 
+          />
+          <Route 
+            path="/data-visualization" 
+            element={<DataVisualization />} 
+          />
+          <Route 
+            path="/emergency-alert" 
+            element={isLoggedIn ? <EmergencyAlert /> : <Navigate to="/signup" />} 
+          />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        </Routes>
+      </Router>
     </ContactProvider>
   );
 }

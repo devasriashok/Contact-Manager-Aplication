@@ -35,8 +35,35 @@ function AddContact({ onContactAdded }) {
     }
   };
 
+  const validateForm = () => {
+    const { name, email, phone } = formData;
+    const phoneRegex = /^[0-9]{10}$/; // Regex for 10-digit phone number
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex for valid email format
+    const nameRegex = /^[A-Za-z]+$/; // Regex to ensure name contains only alphabets
+
+    if (!name || !email || !phone || !selectedType) {
+      alert('All fields are mandatory.');
+      return false;
+    }
+    if (!nameRegex.test(name)) {
+      alert('Name must contain only alphabetic characters.');
+      return false;
+    }
+    if (!phoneRegex.test(phone)) {
+      alert('Phone number must be exactly 10 digits.');
+      return false;
+    }
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address.');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return; // Prevent submission if validation fails
+
     try {
       await axios.post('http://localhost:5000/api/contacts', {
         type: selectedType,
@@ -71,16 +98,34 @@ function AddContact({ onContactAdded }) {
             value={customType}
             onChange={handleCustomTypeChange}
           />
-          <button type="button" onClick={handleAddType}>Add Type</button><br></br><br></br>
+          <button type="button" onClick={handleAddType}>Add Type</button><br /><br />
 
           <label>Name:</label>
-          <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
 
           <label>Email:</label>
-          <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+          />
 
           <label>Phone:</label>
-          <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required />
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleInputChange}
+            required
+          />
 
           {selectedType && (
             <>
